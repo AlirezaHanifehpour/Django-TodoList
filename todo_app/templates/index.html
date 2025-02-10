@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+    <div class="app h-[100vh] bg-blue-500
+    flex items-center justify-center">
+        <div class="card bg-white w-[500px] p-4 rounded-2xl">
+            <div class="card-title text-5xl font-bold
+            flex flex-col items-center justify-center">
+                <p>Todo App</p>
+            </div>
+            <div class="card-content mt-10">
+                <div>
+                    <form action="#" autocomplete="off">
+                        <div class="flex gap-3 bg-green-100 rounded-full p-3">
+                            <input type="text" name="add" class="
+                            bg-transparent w-full outline-none
+                            focus:ring-0 border-none text-lg" placeholder="Book...">
+                            <button class="w-[50px] h-[50px] p-3 
+                            flex items-center justify-center 
+                            rounded-full bg-green-600 text-white">
+                                Add
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="mt-5">
+                        {% if books|length > 0 %}
+                            <ul style="overflow-y: auto;height: 300px;" class="books flex flex-col gap-3 text-white">
+                                {% for book in books %}
+                                    <li class="book font-bold flex justify-between items-center p-3
+                                    bg-blue-500 rounded-2xl">
+                                        {{book.name}}
+                                        <a href="{% url 'todo_app:remove_book' book.id %}" class="flex">
+                                            <box-icon name="x" color="red" size="md"></box-icon>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="text-center">There is no book!</p>
+                        {% endif %}
+                    
+                </div>
+                <div class="mt-10">
+                    <a href="{% url 'todo_app:clear_book' %}" class="clear p-3 bg-red-600 text-white rounded-2xl">
+                        Remove all
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
